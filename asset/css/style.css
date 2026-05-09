@@ -256,8 +256,6 @@ button {
 }
 
 .nav-search {
-  opacity: 0;
-  animation: fadeSlideDown 0.8s ease forwards 1.6s;
   color: var(--text-secondary);
   transition: color 0.3s ease;
   padding: 4px;
@@ -340,15 +338,16 @@ button {
 
 /* ---------- Hero Bike ---------- */
 .hero-bike {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.92);
   z-index: 10;
   display: grid;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 720px;
+  width: min(720px, 90vw);
   opacity: 0;
-  transform: scale(0.92);
   animation: bikeReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s;
 }
 
@@ -371,6 +370,12 @@ button {
 
 .hero-bike:hover img.active {
   transform: translate(var(--px, 0px), var(--py, 0px)) scale(1.02);
+}
+
+/* Keep the wrapper itself centered after animation settles */
+.hero-bike.revealed,
+.hero-bike[style] {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 /* ---------- Bottom Content ---------- */
@@ -578,12 +583,12 @@ button {
 @keyframes bikeReveal {
   from {
     opacity: 0;
-    transform: scale(0.92);
+    transform: translate(-50%, -50%) scale(0.92);
   }
 
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 
@@ -638,7 +643,7 @@ button {
   }
 
   .hero-bike {
-    max-width: 90%;
+    width: 90vw;
   }
 
   .bottom-content {
@@ -664,6 +669,182 @@ button {
 
   .feature-number {
     font-size: 3rem;
+  }
+}
+
+/* ---------- Hamburger Button (mobile only) ---------- */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  padding: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 200;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-secondary);
+  border-radius: 2px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.25s ease,
+    width 0.3s ease;
+  transform-origin: center;
+}
+
+.nav-hamburger.open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.nav-hamburger.open span:nth-child(2) {
+  opacity: 0;
+  width: 0;
+}
+
+.nav-hamburger.open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ---------- Mobile Menu Overlay ---------- */
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 149;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.mobile-menu-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ---------- Mobile Drawer ---------- */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 150;
+  width: min(320px, 85vw);
+  background: rgba(8, 8, 8, 0.97);
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  flex-direction: column;
+  padding: 32px 28px 40px;
+  gap: 32px;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(20px);
+}
+
+.mobile-drawer.open {
+  transform: translateX(0);
+}
+
+.mobile-drawer-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+  padding: 4px;
+}
+
+.mobile-drawer-close:hover {
+  color: var(--accent);
+}
+
+.mobile-drawer-logo {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: var(--text-muted);
+  padding-top: 8px;
+}
+
+.mobile-drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  margin-top: 8px;
+}
+
+.mobile-nav-link {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: color 0.3s ease, padding-left 0.3s ease;
+  display: block;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  color: var(--text-primary);
+  padding-left: 8px;
+}
+
+.mobile-nav-link.active {
+  color: var(--accent);
+}
+
+.mobile-drawer-socials {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.mobile-social-link {
+  color: var(--text-muted);
+  transition: color 0.3s ease, transform 0.3s ease;
+  padding: 4px;
+}
+
+.mobile-social-link:hover {
+  color: var(--accent);
+  transform: scale(1.15);
+}
+
+/* ---------- Nav Right Wrapper ---------- */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: fadeSlideDown 0.8s ease forwards 1.6s;
+}
+
+/* Show hamburger, hide nav-links on mobile */
+@media (max-width: 768px) {
+  .nav-hamburger {
+    display: flex;
+  }
+
+  .mobile-menu-overlay {
+    display: block;
   }
 }
 
