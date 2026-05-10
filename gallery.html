@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Supermoto in its element — on-road, off-road, studio, and race. Browse the full visual archive.">
+    <title>SUPERMOTO | Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="asset/css/style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'><path d='M14 2L2 8v12l12 6 12-6V8L14 2z' stroke='%2300e5ff' stroke-width='1.5' fill='none'/><circle cx='14' cy='14' r='2' fill='%2300e5ff'/></svg>">
+</head>
+
+<body class="page-gallery">
+
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-line"></div>
+            <span class="preloader-text">SUPERMOTO</span>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay" aria-hidden="true"></div>
+
+    <!-- Mobile Drawer -->
+    <nav class="mobile-drawer" id="mobile-drawer" role="dialog" aria-label="Mobile navigation" aria-hidden="true">
+        <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+        </button>
+        <div class="mobile-drawer-logo">SUPERMOTO</div>
+        <div class="mobile-drawer-links">
+            <a href="index.html" class="mobile-nav-link" data-page="home">HOME</a>
+            <a href="models.html" class="mobile-nav-link" data-page="models">MODELS</a>
+            <a href="specs.html" class="mobile-nav-link" data-page="specs">SPECS</a>
+            <a href="gallery.html" class="mobile-nav-link active" data-page="gallery">GALLERY</a>
+            <a href="contact.html" class="mobile-nav-link" data-page="contact">CONTACT</a>
+        </div>
+        <div class="mobile-drawer-socials">
+            <a href="#" class="mobile-social-link" aria-label="Twitter" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+            </a>
+            <a href="#" class="mobile-social-link" aria-label="Instagram" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                </svg>
+            </a>
+            <a href="#" class="mobile-social-link" aria-label="YouTube" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Sticky Navigation -->
+    <header id="main-nav" class="nav models-nav">
+        <a href="index.html" class="nav-logo" aria-label="Supermoto home">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <path d="M14 2L2 8v12l12 6 12-6V8L14 2z" stroke="currentColor" stroke-width="1.5" fill="none" />
+                <path d="M14 8l-6 3v6l6 3 6-3v-6l-6-3z" stroke="currentColor" stroke-width="1.5" fill="none" />
+                <circle cx="14" cy="14" r="2" fill="currentColor" />
+            </svg>
+            <span class="nav-logo-text">SUPERMOTO</span>
+        </a>
+        <nav class="nav-links" aria-label="Main navigation">
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="models.html" class="nav-link">MODELS</a>
+            <a href="specs.html" class="nav-link">SPECS</a>
+            <a href="gallery.html" class="nav-link active">GALLERY</a>
+            <a href="contact.html" class="nav-link">CONTACT</a>
+        </nav>
+        <div class="nav-right">
+            <button class="nav-search" aria-label="Search">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="7" />
+                    <path d="m21 21-4.35-4.35" />
+                </svg>
+            </button>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false"
+                aria-controls="mobile-drawer">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ============ GALLERY PAGE ============ -->
+    <main class="gallery-page">
+
+        <!-- Page Header -->
+        <section class="gallery-header">
+            <div class="gallery-bg-text" aria-hidden="true"><span>GALLERY</span></div>
+            <div class="gallery-header-content">
+                <p class="gallery-eyebrow">VISUAL ARCHIVE</p>
+                <h1 class="gallery-title">In the <em>Wild</em></h1>
+                <p class="gallery-subtitle">Every angle. Every condition. Pure machine.</p>
+            </div>
+        </section>
+
+        <!-- Filter Bar -->
+        <section class="gallery-filter-section">
+            <div class="gallery-filter-bar" role="tablist" aria-label="Filter gallery by category">
+                <button class="gallery-filter-btn active" role="tab" aria-selected="true" data-filter="all">ALL</button>
+                <button class="gallery-filter-btn" role="tab" aria-selected="false" data-filter="onroad">ON
+                    ROAD</button>
+                <button class="gallery-filter-btn" role="tab" aria-selected="false" data-filter="offroad">OFF
+                    ROAD</button>
+                <button class="gallery-filter-btn" role="tab" aria-selected="false" data-filter="studio">STUDIO</button>
+                <button class="gallery-filter-btn" role="tab" aria-selected="false" data-filter="race">RACE</button>
+            </div>
+            <div class="gallery-count">
+                <span id="gallery-count-num">10</span><span class="gallery-count-label"> SHOTS</span>
+            </div>
+        </section>
+
+        <!-- Masonry Grid -->
+        <section class="gallery-grid-section">
+            <div class="gallery-masonry" id="gallery-masonry">
+
+                <!--
+          Each card uses: data-category, data-index, data-caption, data-bike
+          Replace the <img> src with your Gemini-generated image once ready.
+          The placeholder div shows filename + category until then.
+          Aspect classes: (none) = square-ish | gallery-card--tall = portrait | gallery-card--wide = landscape
+        -->
+
+                <!-- 01 — On Road / tall -->
+                <article class="gallery-card gallery-card--tall" data-category="onroad" data-index="0"
+                    data-caption="Husqvarna 701 — Night run, city canyon" data-bike="HUSQVARNA 701">
+                    <div class="gallery-card-img">
+                        <img src="asset/img/gallery/01-husqvarna-night-city.png"
+                            alt="Husqvarna 701 Supermoto on rain-slicked urban street at night" loading="lazy"
+                            onerror="this.style.display='none'">
+                        <div class="gallery-placeholder">
+                            <span class="gallery-ph-file">01-husqvarna-night-city.jpg</span>
+                            <span class="gallery-ph-cat">ON ROAD</span>
+                        </div>
+                    </div>
+                    <div class="gallery-card-overlay">
+                        <div class="gallery-card-overlay-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                            </svg>
+                        </div>
+                        <div class="gallery-card-overlay-info">
+                            <span class="gallery-card-tag">ON ROAD</span>
+                            <span class="gallery-card-caption">Husqvarna 701 — Night run, city canyon</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 02 — Studio / wide -->
+                <article class="gallery-card gallery-card--wide" data-category="studio" data-index="1"
+                    data-caption="KTM 690 SMC R — Studio black" data-bike="KTM 690 SMC R">
+                    <div class="gallery-card-img">
+                        <img src="asset/img/gallery/02-ktm-studio-black.png"
+                            alt="KTM 690 SMC R in pitch-black studio with orange rim lighting" loading="lazy"
+                            onerror="this.style.display='none'">
+                        <div class="gallery-placeholder">
+                            <span class="gallery-ph-file">02-ktm-studio-black.jpg</span>
+                            <span class="gallery-ph-cat">STUDIO</span>
+                        </div>
+                    </div>
+                    <div class="gallery-card-overlay">
+                        <div class="gallery-card-overlay-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                            </svg>
+                        </div>
+                        <div class="gallery-card-overlay-info">
+                            <span class="gallery-card-tag">STUDIO</span>
+                            <span class="gallery-card-caption">KTM 690 SMC R — Studio black</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 03 — Off Road / square -->
+                <article class="gallery-card" data-category="offroad" data-index="2"
+                    data-caption="Yamaha WR450F — Dirt corner, desert heat" data-bike="YAMAHA WR450F">
+                    <div class="gallery-card-img">
+                        <img src="asset/img/gallery/03-yamaha-dirt-corner.png"
+                            alt="Yamaha WR450F leaning into dusty desert corner with rooster tail of dust"
+                            loading="lazy" onerror="this.style.display='none'">
+                        <div class="gallery-placeholder">
+                            <span class="gallery-ph-file">03-yamaha-dirt-corner.jpg</span>
+                            <span class="gallery-ph-cat">OFF ROAD</span>
+                        </div>
+                    </div>
+                    <div class="gallery-card-overlay">
+                        <div class="gallery-card-overlay-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                            </svg>
+                        </div>
+                        <div class="gallery-card-overlay-info">
+                            <span class="gallery-card-tag">OFF ROAD</span>
+                            <span class="gallery-card-caption">Yamaha WR450F — Dirt corner, desert heat</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 04 — On Road / wide -->
+                <article class="gallery-card gallery-card--wide" data-category="onroad" data-index="3"
+                    data-caption="Kawasaki KLX450R — Wet road, motion" data-bike="KAWASAKI KLX450R">
+                    <div class="gallery-card-img">
+                        <img src="asset/img/gallery/04-kawasaki-wet-road.png"
+                            alt="Kawasaki KLX450R panning shot in full lean on wet mountain road at dusk" loading="lazy"
+                            onerror="this.style.display='none'">
+                        <div class="gallery-placeholder">
+                            <span class="gallery-ph-file">04-kawasaki-wet-road.jpg</span>
+                            <span class="gallery-ph-cat">ON ROAD</span>
+                        </div>
+                    </div>
+                    <div class="gallery-card-overlay">
+                        <div class="gallery-card-overlay-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                            </svg>
+                        </div>
+                        <div class="gallery-card-overlay-info">
+                            <span class="gallery-card-tag">ON ROAD</span>
+                            <span class="gallery-card-caption">Kawasaki KLX450R — Wet road, motion</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 05 — Studio / square -->
+                <article class="gallery-card" data-category="studio" data-index="4"
+                    data-caption="Husqvarna 701 — Engine detail, studio" data-bike="HUSQVARNA 701">
+                    <div class="gallery-card-img">
+                        <img src="asset/img/gallery/05-husqvarna-studio-detail.png"
+                            alt="Husqvarna 701 single-cylinder engine macro detail with dramatic raking light"
+                            loading="lazy" onerror="this.style.display='none'">
+                        <div class="gallery-placeholder">
+                            <span class="gallery-ph-file">05-husqvarna-studio-detail.jpg</span>
+                            <span class="gallery-ph-cat">STUDIO</span>
+                        </div>
+                    </div>
+                    <div class="gallery-card-overlay">
+                        <div class="gallery-card-overlay-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                            </svg>
+                        </div>
+                        <div class="gallery-card-overlay-info">
+                            <span class="gallery-card-tag">STUDIO</span>
+                            <span class="gallery-card-caption">Husqvarna 701 — Engine detail, studio</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 06 — Race / wide -->
+                <article class="gallery-card gallery-card--wide" data-category="race" data-index="5"
+                    data-caption="KTM 690 SMC R — Supermoto track, apex" data-bike="KTM 690 SMC R">
+                    <div class="gallery-card-img">
+                        <img src="asset/img/gallery/06-ktm-race-track.png"
+                            alt="KTM 690 SMC R at maximum lean on supermoto circuit hairpin corner" loading="lazy"
+                            onerror="this.style.display='none'">
+                        <div class="gallery-placeholder">
+                            <span class="gallery-ph-file">06-ktm-race-track.jpg</span>
+                            <span class="gallery-ph-cat">RACE</span>
+                        </div>
+                    </div>
+                    <div class="gallery-card-overlay">
+                        <div class="gallery-card-overlay-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                            </svg>
+                        </div>
+                        <div class="gallery-card-overlay-info">
+                            <span class="gallery-card-tag">RACE</span>
+                            <span class="gallery-card-caption">KTM 690 SMC R — Supermoto track, apex</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 07 — Off Road / tall -->
+                <article class="gallery-card gallery-card--tall" data-category="offroad" data-index="6"
+                    data-caption="Honda CRF450L — Forest track at dawn" data-bike="HONDA CRF450L">
+                    <div class="gallery-card-img">
+                        <img src="asset/img/gallery/07-honda-forest-road.png"
+                            alt="Honda CRF450L parked on foggy forest gravel track at dawn" loading="lazy"
+                            onerror="this.style.display='none'">
+                        <div class="gallery-placeholder">
+                            <span class="gallery-ph-file">07-honda-forest-road.jpg</span>
+                            <span class="gallery-ph-cat">OFF ROAD</span>
+                        </div>
+                    </div>
+                    <div class="gallery-card-overlay">
+                        <div class="gallery-card-overlay-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                            </svg>
+                        </div>
+                        <div class="gallery-card-overlay-info">
+                            <span class="gallery-card-tag">OFF ROAD</span>
+                            <span class="gallery-card-caption">Honda CRF450L — Forest track at dawn</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 08 — Race / square -->
+                <article class="gallery-card" data-category="race" data-index="7"
+                    data-caption="Yamaha WR450F — Mid-pack, race start" data-bike="YAMAHA WR450F">
+                    <div class="gallery-card-img">
+                        <img src="asset/img/gallery/08-yamaha-race-pack.png"
+                            alt="Pack of supermoto bikes with Yamaha WR450F leading out of a first-lap corner"
+                            loading="lazy" onerror="this.style.display='none'">
+                        <div class="gallery-placeholder">
+                            <span class="gallery-ph-file">08-yamaha-race-pack.jpg</span>
+                            <span class="gallery-ph-cat">RACE</span>
+                        </div>
+                    </div>
+                    <div class="gallery-card-overlay">
+                        <div class="gallery-card-overlay-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                            </svg>
+                        </div>
+                        <div class="gallery-card-overlay-info">
+                            <span class="gallery-card-tag">RACE</span>
+                            <span class="gallery-card-caption">Yamaha WR450F — Mid-pack, race start</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 09 — On Road / square -->
+                <article class="gallery-card" data-category="onroad" data-index="8"
+                    data-caption="Kawasaki KLX450R — Urban stunt, rooftop" data-bike="KAWASAKI KLX450R">
+                    <div class="gallery-card-img">
+                        <img src="asset/img/gallery/09-kawasaki-urban-stunt.png"
+                            alt="Kawasaki KLX450R wheelie on urban rooftop against blue-hour city skyline"
+                            loading="lazy" onerror="this.style.display='none'">
+                        <div class="gallery-placeholder">
+                            <span class="gallery-ph-file">09-kawasaki-urban-stunt.jpg</span>
+                            <span class="gallery-ph-cat">ON ROAD</span>
+                        </div>
+                    </div>
+                    <div class="gallery-card-overlay">
+                        <div class="gallery-card-overlay-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                            </svg>
+                        </div>
+                        <div class="gallery-card-overlay-info">
+                            <span class="gallery-card-tag">ON ROAD</span>
+                            <span class="gallery-card-caption">Kawasaki KLX450R — Urban stunt, rooftop</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 10 — On Road / wide (bonus) -->
+                <article class="gallery-card gallery-card--wide" data-category="onroad" data-index="9"
+                    data-caption="Supermoto — Rain-soaked city, cyan light" data-bike="SUPERMOTO">
+                    <div class="gallery-card-img">
+                        <img src="asset/img/gallery/10-supermoto-night-rain.png"
+                            alt="Dark supermoto on rain-soaked urban street with cyan LED accent lighting"
+                            loading="lazy" onerror="this.style.display='none'">
+                        <div class="gallery-placeholder">
+                            <span class="gallery-ph-file">10-supermoto-night-rain.png</span>
+                            <span class="gallery-ph-cat">ON ROAD</span>
+                        </div>
+                    </div>
+                    <div class="gallery-card-overlay">
+                        <div class="gallery-card-overlay-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                            </svg>
+                        </div>
+                        <div class="gallery-card-overlay-info">
+                            <span class="gallery-card-tag">ON ROAD</span>
+                            <span class="gallery-card-caption">Supermoto — Rain-soaked city, cyan light</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div><!-- /.gallery-masonry -->
+
+            <!-- Empty state -->
+            <div class="gallery-empty" id="gallery-empty" aria-live="polite">No shots in this category yet.</div>
+
+        </section>
+
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+        <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+        </button>
+        <button class="lightbox-arrow lightbox-arrow--prev" id="lightbox-prev" aria-label="Previous image">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M15 18l-6-6 6-6" />
+            </svg>
+        </button>
+        <button class="lightbox-arrow lightbox-arrow--next" id="lightbox-next" aria-label="Next image">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M9 18l6-6-6-6" />
+            </svg>
+        </button>
+        <div class="lightbox-content" id="lightbox-content">
+            <div class="lightbox-img-wrap">
+                <img src="" alt="" class="lightbox-img" id="lightbox-img">
+                <div class="lightbox-placeholder" id="lightbox-placeholder">
+                    <div class="lightbox-ph-inner">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.15)"
+                            stroke-width="1">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <polyline points="21 15 16 10 5 21" />
+                        </svg>
+                        <span id="lightbox-ph-file"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="lightbox-meta">
+                <div class="lightbox-meta-left">
+                    <span class="lightbox-tag" id="lightbox-tag"></span>
+                    <span class="lightbox-caption" id="lightbox-caption"></span>
+                </div>
+                <div class="lightbox-meta-right">
+                    <span class="lightbox-counter" id="lightbox-counter"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo" aria-label="Supermoto home">
+                    <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+                        <path d="M14 2L2 8v12l12 6 12-6V8L14 2z" stroke="currentColor" stroke-width="1.5" fill="none" />
+                        <path d="M14 8l-6 3v6l6 3 6-3v-6l-6-3z" stroke="currentColor" stroke-width="1.5" fill="none" />
+                        <circle cx="14" cy="14" r="2" fill="currentColor" />
+                    </svg>
+                    <span>SUPERMOTO</span>
+                </a>
+                <p class="footer-tagline">Built for the streets. Tamed for no one.</p>
+            </div>
+            <nav class="footer-links" aria-label="Footer navigation">
+                <a href="models.html" class="footer-link">Models</a>
+                <a href="specs.html" class="footer-link">Specs</a>
+                <a href="gallery.html" class="footer-link">Gallery</a>
+                <a href="contact.html" class="footer-link">Contact</a>
+            </nav>
+            <div class="footer-socials">
+                <a href="#" class="footer-social" aria-label="Twitter" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg>
+                </a>
+                <a href="#" class="footer-social" aria-label="Instagram" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                    </svg>
+                </a>
+                <a href="#" class="footer-social" aria-label="YouTube" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 SUPERMOTO. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script src="asset/js/script.js"></script>
+</body>
+
+</html>

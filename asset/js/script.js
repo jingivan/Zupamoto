@@ -227,14 +227,27 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
 
 
-  // ---------- Nav Active Link ----------
+  // ---------- Nav Active Link (pathname-based) ----------
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-      if (link.getAttribute('href') === '#') e.preventDefault();
-      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
-    });
+    const href = link.getAttribute('href');
+    link.classList.toggle('active', href === currentPage || (currentPage === '' && href === 'index.html'));
   });
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    const href = link.getAttribute('href');
+    link.classList.toggle('active', href === currentPage || (currentPage === '' && href === 'index.html'));
+  });
+
+
+  // ---------- Scroll-triggered Glass Nav (hero page only) ----------
+  const mainNav = document.getElementById('main-nav');
+  if (mainNav && mainNav.classList.contains('nav') && !mainNav.classList.contains('models-nav')) {
+    const onScroll = () => {
+      mainNav.classList.toggle('scrolled', window.scrollY > 40);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // run once on load in case page is already scrolled
+  }
 
 
   // ---------- Dynamic Spotlight ----------
@@ -316,4 +329,562 @@ document.addEventListener('DOMContentLoaded', () => {
       filterCards(btn.dataset.filter);
     });
   });
+})();
+/* ============================================
+   SPECS PAGE — Tab Switcher + Counter (Phase 3)
+   ============================================ */
+
+(function initSpecsPage() {
+
+  const specsTabs = document.querySelectorAll('.specs-tab');
+  if (!specsTabs.length) return; // Not on specs page
+
+  // ---------- Full spec data for all 5 bikes ----------
+  const specsData = [
+    {
+      bike: 'HUSQVARNA 701',
+      hp: 74, torque: 73, weight: 149, tank: 13,
+      engineType: '692cc LC4 single-cylinder, SOHC 4-valve',
+      bore: '102 × 84.5 mm',
+      compression: '12.5:1',
+      fuel: 'EFI, ride-by-wire throttle',
+      cooling: 'Liquid-cooled',
+      power: '74 HP @ 8,000 rpm',
+      torqueSpec: '73 Nm @ 6,500 rpm',
+      topSpeed: '~200 km/h',
+      frame: 'Chromoly steel trellis',
+      weightSpec: '149 kg',
+      seatHeight: '890 mm',
+      tankSpec: '13 L',
+      suspFront: 'WP APEX 43mm USD forks, 200mm travel',
+      suspRear: 'WP APEX monoshock, fully adjustable',
+      brakeFront: '320mm disc, Brembo radial 4-piston caliper',
+      brakeRear: '240mm disc, single-piston caliper',
+      abs: '2-channel Bosch cornering ABS',
+      tyreFront: '120/70 ZR17 — Pirelli Diablo Rosso',
+      tyreRear: '160/60 ZR17 — Pirelli Diablo Rosso',
+      wheels: '17" front & rear',
+    },
+    {
+      bike: 'KTM 690 SMC R',
+      hp: 75, torque: 75, weight: 150, tank: 14,
+      engineType: '693cc LC4 single-cylinder, SOHC 4-valve',
+      bore: '102 × 84.5 mm',
+      compression: '12.6:1',
+      fuel: 'EFI, ride-by-wire + cornering ABS mapping',
+      cooling: 'Liquid-cooled',
+      power: '75 HP @ 7,500 rpm',
+      torqueSpec: '75 Nm @ 6,000 rpm',
+      topSpeed: '~195 km/h',
+      frame: 'Chromoly steel trellis, CNC-machined',
+      weightSpec: '150 kg',
+      seatHeight: '885 mm',
+      tankSpec: '14 L',
+      suspFront: 'WP APEX 43mm USD forks, 200mm travel',
+      suspRear: 'WP APEX PDS monoshock, fully adjustable',
+      brakeFront: '320mm disc, Brembo 4-piston radial caliper',
+      brakeRear: '240mm disc, single-piston caliper',
+      abs: '2-channel Bosch cornering ABS + supermoto mode',
+      tyreFront: '120/70 ZR17 — Pirelli Diablo Supercorsa',
+      tyreRear: '160/60 ZR17 — Pirelli Diablo Supercorsa',
+      wheels: '17" front & rear, lightweight alloy',
+    },
+    {
+      bike: 'YAMAHA WR450F',
+      hp: 63, torque: 52, weight: 118, tank: 7.6,
+      engineType: '450cc DOHC 4-valve forward-inclined single',
+      bore: '97 × 60.8 mm',
+      compression: '12.8:1',
+      fuel: 'EFI, dual injector system',
+      cooling: 'Liquid-cooled',
+      power: '63 HP @ 9,000 rpm',
+      torqueSpec: '52 Nm @ 7,500 rpm',
+      topSpeed: '~170 km/h (supermoto converted)',
+      frame: 'Bilateral aluminium beam frame',
+      weightSpec: '118 kg',
+      seatHeight: '968 mm',
+      tankSpec: '7.6 L',
+      suspFront: 'Öhlins 48mm USD forks, 310mm travel',
+      suspRear: 'Öhlins TTX monoshock, fully adjustable',
+      brakeFront: '270mm disc, Brembo 2-piston caliper',
+      brakeRear: '245mm disc, single-piston caliper',
+      abs: 'None (race-spec)',
+      tyreFront: '120/70 ZR17 — Bridgestone Battlax Hypersport',
+      tyreRear: '160/60 ZR17 — Bridgestone Battlax Hypersport',
+      wheels: '17" supermoto-spec alloy',
+    },
+    {
+      bike: 'KAWASAKI KLX450R',
+      hp: 58, torque: 46, weight: 118, tank: 7.6,
+      engineType: '449cc liquid-cooled 4-stroke single, DOHC',
+      bore: '96 × 62.1 mm',
+      compression: '12.3:1',
+      fuel: 'EFI, Keihin 44mm throttle body',
+      cooling: 'Liquid-cooled',
+      power: '58 HP @ 8,500 rpm',
+      torqueSpec: '46 Nm @ 6,500 rpm',
+      topSpeed: '~160 km/h (supermoto converted)',
+      frame: 'Perimeter aluminium frame, high-tensile steel subframe',
+      weightSpec: '118 kg',
+      seatHeight: '985 mm',
+      tankSpec: '7.6 L',
+      suspFront: 'KYB 48mm inverted forks, 300mm travel',
+      suspRear: 'KYB monoshock, 4-way adjustable',
+      brakeFront: '270mm disc, Nissin 2-piston caliper',
+      brakeRear: '240mm disc, single-piston caliper',
+      abs: 'None (off-road/supermoto spec)',
+      tyreFront: '120/70 ZR17 — Dunlop Sportmax Q4',
+      tyreRear: '160/60 ZR17 — Dunlop Sportmax Q4',
+      wheels: '17" supermoto alloy rims',
+    },
+    {
+      bike: 'HONDA CRF450L',
+      hp: 56, torque: 44, weight: 140, tank: 7.6,
+      engineType: '450cc unicam 4-stroke single, DOHC 4-valve',
+      bore: '96 × 62.1 mm',
+      compression: '12.0:1',
+      fuel: 'EFI, PGM-FI 46mm throttle body',
+      cooling: 'Liquid-cooled',
+      power: '56 HP @ 8,500 rpm',
+      torqueSpec: '44 Nm @ 6,500 rpm',
+      topSpeed: '~155 km/h (supermoto converted)',
+      frame: 'Twin-spar aluminium frame',
+      weightSpec: '140 kg',
+      seatHeight: '905 mm',
+      tankSpec: '7.6 L',
+      suspFront: 'HMAS 49mm cartridge forks, 249mm travel',
+      suspRear: 'HMAS Pro-Link monoshock, adjustable preload',
+      brakeFront: '260mm disc, Nissin 2-piston caliper',
+      brakeRear: '240mm disc, single-piston caliper',
+      abs: 'Dual-channel ABS (road mode)',
+      tyreFront: '120/70 ZR17 — Michelin Pilot Power 3',
+      tyreRear: '160/60 ZR17 — Michelin Pilot Power 3',
+      wheels: '17" cast alloy, supermoto conversion',
+    },
+  ];
+
+  // ---------- Counter animation ----------
+  const counters = document.querySelectorAll('.specs-counter');
+  let countersAnimated = false;
+
+  function animateCounters(data) {
+    counters.forEach(counter => {
+      const key = counter.dataset.target;
+      const targetEl = counter.closest('.specs-hero-stat');
+      const labelEl = targetEl ? targetEl.querySelector('.specs-hero-label') : null;
+
+      // map label to data key
+      let targetVal;
+      if (labelEl) {
+        const label = labelEl.textContent.trim();
+        if (label === 'Peak Power') targetVal = data.hp;
+        if (label === 'Max Torque') targetVal = data.torque;
+        if (label === 'Dry Weight') targetVal = data.weight;
+        if (label === 'Fuel Tank') targetVal = data.tank;
+      }
+
+      if (targetVal === undefined) return;
+
+      const isDecimal = !Number.isInteger(targetVal);
+      const start = 0;
+      const end = targetVal;
+      const duration = 900;
+      const startTime = performance.now();
+
+      function tick(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const current = start + (end - start) * ease;
+        counter.textContent = isDecimal ? current.toFixed(1) : Math.round(current);
+        if (progress < 1) requestAnimationFrame(tick);
+        else counter.textContent = isDecimal ? end.toFixed(1) : end;
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  // ---------- Tab switching ----------
+  const colBike = document.getElementById('specs-col-bike');
+  const specsTbody = document.getElementById('specs-tbody');
+
+  const keyMap = {
+    engineType: 'engineType', bore: 'bore', compression: 'compression',
+    fuel: 'fuel', cooling: 'cooling',
+    power: 'power', torque: 'torqueSpec', topSpeed: 'topSpeed',
+    frame: 'frame', weight: 'weightSpec', seatHeight: 'seatHeight', tank: 'tankSpec',
+    suspFront: 'suspFront', suspRear: 'suspRear',
+    brakeFront: 'brakeFront', brakeRear: 'brakeRear', abs: 'abs',
+    tyreFront: 'tyreFront', tyreRear: 'tyreRear', wheels: 'wheels',
+  };
+
+  function switchBike(index) {
+    const data = specsData[index];
+    if (!data) return;
+
+    // Update column header
+    if (colBike) colBike.textContent = data.bike;
+
+    // Flash table values
+    const valCells = specsTbody ? specsTbody.querySelectorAll('[data-key]') : [];
+    valCells.forEach(cell => {
+      cell.style.transition = 'opacity 0.2s ease';
+      cell.style.opacity = '0';
+    });
+
+    setTimeout(() => {
+      valCells.forEach(cell => {
+        const key = cell.dataset.key;
+        const dataKey = keyMap[key] || key;
+        if (data[dataKey] !== undefined) cell.textContent = data[dataKey];
+        cell.style.opacity = '1';
+      });
+      // Re-animate counters on tab switch
+      animateCounters(data);
+    }, 220);
+  }
+
+  specsTabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => {
+      specsTabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      switchBike(i);
+    });
+  });
+
+  // ---------- Scroll reveal for specs rows ----------
+  const specsObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, idx) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('revealed');
+        }, idx * 40);
+        specsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.specs-row[data-reveal], .specs-hero-stat[data-reveal], .specs-download-cta[data-reveal]').forEach(el => {
+    specsObserver.observe(el);
+  });
+
+  // Trigger counters when hero stats come into view
+  const heroStatsEl = document.getElementById('specs-hero-stats');
+  if (heroStatsEl) {
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !countersAnimated) {
+          countersAnimated = true;
+          animateCounters(specsData[0]);
+          counterObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    counterObserver.observe(heroStatsEl);
+  }
+
+})();
+/* ============================================
+   GALLERY PAGE — Filter + Lightbox (Phase 4)
+   ============================================ */
+
+(function initGalleryPage() {
+  const filterBtns = document.querySelectorAll('.gallery-filter-btn');
+  if (!filterBtns.length) return; // Not on gallery page
+
+  const cards = Array.from(document.querySelectorAll('.gallery-card'));
+  const countEl = document.getElementById('gallery-count-num');
+  const emptyEl = document.getElementById('gallery-empty');
+
+  // Lightbox elements
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxTag = document.getElementById('lightbox-tag');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxCounter = document.getElementById('lightbox-counter');
+  const lightboxPh = document.getElementById('lightbox-placeholder');
+  const lightboxPhFile = document.getElementById('lightbox-ph-file');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+  const lightboxBd = document.getElementById('lightbox-backdrop');
+
+  let filteredCards = [...cards];
+  let lightboxIndex = 0;
+
+  // ---------- Stagger reveal on load ----------
+  cards.forEach((card, i) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(22px)';
+    card.style.transition =
+      `opacity 0.5s ease ${i * 0.07}s, transform 0.5s cubic-bezier(0.16,1,0.3,1) ${i * 0.07}s`;
+    setTimeout(() => {
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, 80);
+  });
+
+  // ---------- Filter ----------
+  const tagReadable = { onroad: 'ON ROAD', offroad: 'OFF ROAD', studio: 'STUDIO', race: 'RACE' };
+
+  function applyFilter(filter) {
+    filteredCards = [];
+    cards.forEach(card => {
+      const match = filter === 'all' || card.dataset.category === filter;
+      card.style.display = match ? '' : 'none';
+      if (match) filteredCards.push(card);
+    });
+
+    if (countEl) countEl.textContent = filteredCards.length;
+    if (emptyEl) emptyEl.style.display = filteredCards.length === 0 ? 'block' : 'none';
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      applyFilter(btn.dataset.filter);
+    });
+  });
+
+  // Initial state
+  applyFilter('all');
+
+  // ---------- Lightbox ----------
+  function renderLightbox() {
+    const card = filteredCards[lightboxIndex];
+    if (!card) return;
+
+    const imgEl = card.querySelector('.gallery-card-img img');
+    const caption = card.dataset.caption || '';
+    const catKey = card.dataset.category || '';
+    const tag = tagReadable[catKey] || catKey.toUpperCase();
+
+    if (lightboxTag) lightboxTag.textContent = tag;
+    if (lightboxCaption) lightboxCaption.textContent = caption;
+    if (lightboxCounter) lightboxCounter.textContent =
+      `${lightboxIndex + 1} / ${filteredCards.length}`;
+
+    const hasImg = imgEl && imgEl.src && imgEl.style.display !== 'none';
+
+    if (hasImg) {
+      lightboxImg.src = imgEl.src;
+      lightboxImg.alt = imgEl.alt || caption;
+      lightboxImg.style.display = '';
+      if (lightboxPh) lightboxPh.style.display = 'none';
+    } else {
+      lightboxImg.src = '';
+      lightboxImg.style.display = 'none';
+      if (lightboxPh) {
+        lightboxPh.style.display = 'flex';
+        const phFile = card.querySelector('.gallery-ph-file');
+        if (lightboxPhFile && phFile) lightboxPhFile.textContent = phFile.textContent;
+      }
+    }
+  }
+
+  function openLightbox(card) {
+    lightboxIndex = filteredCards.indexOf(card);
+    if (lightboxIndex === -1) return;
+    renderLightbox();
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (lightboxClose) lightboxClose.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function navLightbox(dir) {
+    if (!filteredCards.length) return;
+    lightboxIndex = (lightboxIndex + dir + filteredCards.length) % filteredCards.length;
+    renderLightbox();
+  }
+
+  // Card click opens lightbox
+  cards.forEach(card => {
+    card.addEventListener('click', () => openLightbox(card));
+  });
+
+  // Controls
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightboxBd) lightboxBd.addEventListener('click', closeLightbox);
+  if (lightboxPrev) lightboxPrev.addEventListener('click', () => navLightbox(-1));
+  if (lightboxNext) lightboxNext.addEventListener('click', () => navLightbox(1));
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (!lightbox || !lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') { e.preventDefault(); closeLightbox(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); navLightbox(-1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); navLightbox(1); }
+  });
+
+  // Touch swipe inside lightbox
+  let lbTouchX = 0;
+  if (lightbox) {
+    lightbox.addEventListener('touchstart', e => {
+      lbTouchX = e.changedTouches[0].clientX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', e => {
+      const diff = lbTouchX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) navLightbox(diff > 0 ? 1 : -1);
+    }, { passive: true });
+  }
+
+})();
+/* ============================================
+   CONTACT PAGE — Form Validation + Submit (Phase 5)
+   ============================================ */
+
+(function initContactPage() {
+  if (!document.querySelector('.contact-page')) return;
+
+  // ---------- [data-reveal] scroll entrance ----------
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  if (revealEls.length) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Stagger: info panel first, form second
+          const delay = entry.target.classList.contains('contact-info') ? 0 : 120;
+          setTimeout(() => entry.target.classList.add('revealed'), delay);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => revealObserver.observe(el));
+  }
+
+  // ---------- Elements ----------
+  const form = document.getElementById('contact-form');
+  const submitBtn = document.getElementById('form-submit');
+  const spinner = document.getElementById('form-spinner');
+  const successEl = document.getElementById('contact-success');
+  const resetBtn = document.getElementById('contact-success-reset');
+
+  if (!form) return;
+
+  const fields = {
+    name: { el: document.getElementById('field-name'), err: document.getElementById('error-name') },
+    email: { el: document.getElementById('field-email'), err: document.getElementById('error-email') },
+    phone: { el: document.getElementById('field-phone'), err: document.getElementById('error-phone') },
+    model: { el: document.getElementById('field-model'), err: document.getElementById('error-model') },
+    message: { el: document.getElementById('field-message'), err: document.getElementById('error-message') },
+  };
+
+  // ---------- Validation rules ----------
+  const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRx = /^[\d\s\+\-\(\)\.]{7,20}$/;
+
+  function validate() {
+    let ok = true;
+
+    const checks = [
+      {
+        key: 'name',
+        test: () => fields.name.el.value.trim().length >= 2,
+        msg: 'Please enter your name.',
+      },
+      {
+        key: 'email',
+        test: () => emailRx.test(fields.email.el.value.trim()),
+        msg: 'Please enter a valid email address.',
+      },
+      {
+        key: 'phone',
+        test: () => {
+          const v = fields.phone.el.value.trim();
+          return v === '' || phoneRx.test(v); // optional
+        },
+        msg: 'Enter a valid phone number, or leave blank.',
+      },
+      {
+        key: 'model',
+        test: () => fields.model.el.value !== '',
+        msg: 'Please select a model or inquiry type.',
+      },
+      {
+        key: 'message',
+        test: () => fields.message.el.value.trim().length >= 10,
+        msg: 'Please enter a message (10+ characters).',
+      },
+    ];
+
+    checks.forEach(({ key, test, msg }) => {
+      if (!test()) {
+        showError(fields[key], msg);
+        ok = false;
+      } else {
+        clearError(fields[key]);
+      }
+    });
+
+    return ok;
+  }
+
+  function showError({ el, err }, msg) {
+    el.classList.add('error');
+    err.textContent = msg;
+    err.classList.add('visible');
+  }
+
+  function clearError({ el, err }) {
+    el.classList.remove('error');
+    err.textContent = '';
+    err.classList.remove('visible');
+  }
+
+  // Clear error live as the user types / changes
+  Object.values(fields).forEach(({ el, err }) => {
+    const evts = el.tagName === 'SELECT' ? ['change'] : ['input', 'change'];
+    evts.forEach(evt => el.addEventListener(evt, () => {
+      if (el.classList.contains('error')) clearError({ el, err });
+    }));
+  });
+
+  // ---------- Submit ----------
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!validate()) {
+      // Focus first errored field
+      const first = Object.values(fields).find(f => f.el.classList.contains('error'));
+      if (first) first.el.focus();
+      return;
+    }
+
+    // Submitting state
+    submitBtn.classList.add('submitting');
+
+    // Simulate async send (~1.4 s)
+    setTimeout(() => {
+      form.style.display = 'none';
+      successEl.hidden = false;
+      submitBtn.classList.remove('submitting');
+    }, 1400);
+  });
+
+  // ---------- Reset ----------
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      form.reset();
+      Object.values(fields).forEach(f => clearError(f));
+      successEl.hidden = true;
+      form.style.display = '';
+      if (fields.name.el) fields.name.el.focus();
+    });
+  }
+
 })();
